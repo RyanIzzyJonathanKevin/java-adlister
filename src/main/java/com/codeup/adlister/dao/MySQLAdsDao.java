@@ -3,9 +3,6 @@ package com.codeup.adlister.dao;
 import com.codeup.adlister.models.Ad;
 import com.mysql.cj.jdbc.Driver;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -93,6 +90,54 @@ public class MySQLAdsDao implements Ads {
             return createAdsFromResults(rs);
         }catch (SQLException e){
             throw new RuntimeException("Error finding ads by User Id", e);
+        }
+    }
+
+    @Override
+    public Long editAd(Ad ad) {
+        try {
+            // Query
+            String query = "UPDATE ads SET title = ?, description = ?, WHERE id = ?";
+            PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+
+            // Add information
+            stmt.setString(1, ad.getTitle());
+            stmt.setString(2, ad.getDescription());
+            stmt.setLong(3, ad.getId());
+
+            // Execute
+            stmt.executeUpdate();
+
+            ResultSet rs = stmt.getGeneratedKeys();
+            rs.next();
+
+            // Return row updated
+            return rs.getLong(1);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error editing ad by id", e);
+        }
+    }
+
+    @Override
+    public Long deleteAd(long id) {
+        try {
+            // Query
+            String query = "DELETE FROM ads WHERE id = ?";
+            PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+
+            // Add id
+            stmt.setLong(1, id);
+
+            // Execute
+            stmt.executeUpdate();
+
+            ResultSet rs = stmt.getGeneratedKeys();
+            rs.next();
+
+            // Return row deleted
+            return rs.getLong(1);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error editing ad by id", e);
         }
     }
 

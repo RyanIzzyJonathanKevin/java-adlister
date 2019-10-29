@@ -13,4 +13,8 @@ public interface Ads {
     List<Ad> findAdsbySearch(String search);
     // Find ads by user id
     List<Ad> findAdsbyUserId(long id);
+    // Edit ad by id
+    Long editAd(Ad ad);
+    // Delete ad by id
+    Long deleteAd(long id);
 }
