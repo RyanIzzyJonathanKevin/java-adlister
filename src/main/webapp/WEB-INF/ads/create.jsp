@@ -17,17 +17,31 @@
                 <label for="description">Description</label>
                 <textarea id="description" name="description" class="form-control" type="text"></textarea>
             </div>
+
+            //Category Checkbox
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                <label class="form-check-label" for="inlineCheckbox1">1</label>
+                <input class="form-check-input" type="checkbox" name="categoryCheckbox" id="concert" value="1">
+                <label class="form-check-label" for="concert">Concert</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                <label class="form-check-label" for="inlineCheckbox2">2</label>
+                <input class="form-check-input" type="checkbox" name="categoryCheckbox" id="movie" value="2">
+                <label class="form-check-label" for="movie">Movie</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
-                <label class="form-check-label" for="inlineCheckbox3">3 (disabled)</label>
+                <input class="form-check-input" type="checkbox" name="categoryCheckbox" id="charity" value="3">
+                <label class="form-check-label" for="charity">Charity</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="categoryCheckbox" id="sports" value="4">
+                <label class="form-check-label" for="sports">sports</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="categoryCheckbox" id="musical" value="5">
+                <label class="form-check-label" for="musical">musical</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="categoryCheckbox" id="arts" value="6">
+                <label class="form-check-label" for="arts">arts</label>
             </div>
             <input type="submit" class="btn btn-block btn-primary">
         </form>
