@@ -42,9 +42,12 @@ public class MySQLAdsDao implements Ads {
     public List<String> findCategory(long id) {
         PreparedStatement stmt = null;
 
-        try{
-            String query = "SELECT category FROM categories JOIN ad_category ON category_ad.category_id = categories.id" +
-                    "JOIN ads ON ads.id = ad_category.ad_id WHERE id = ? ";
+        List<String> categories = new ArrayList<>();
+
+        try {
+
+            String query = "SELECT category FROM categories JOIN ad_category ON ad_category.category_id = categories.id\n" +
+                    " JOIN ads ON ads.id = ad_category.ad_id WHERE ads.id = ?";
 
 
             stmt = connection.prepareStatement(query);
@@ -53,11 +56,17 @@ public class MySQLAdsDao implements Ads {
 
             ResultSet rs = stmt.executeQuery();
 
+            while(rs.next()) {
+
+                categories.add(rs.getString("category"));
+            }
 
 
         } catch(SQLException e) {
             throw new RuntimeException("Error finding the categories.", e);
         }
+
+        return categories;
     }
 
     @Override
@@ -78,7 +87,6 @@ public class MySQLAdsDao implements Ads {
     }
 
     private Ad extractAd(ResultSet rs) throws SQLException {
-
         return new Ad(
             rs.getLong("id"),
             rs.getLong("user_id"),
@@ -94,5 +102,14 @@ public class MySQLAdsDao implements Ads {
             ads.add(extractAd(rs));
         }
         return ads;
+    }
+
+    public static void main(String[] args) {
+
+        Config config = new Config();
+
+        MySQLAdsDao test = new MySQLAdsDao(config);
+
+        System.out.println(test.findCategory(2));
     }
 }
