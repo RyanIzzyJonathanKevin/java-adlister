@@ -15,6 +15,8 @@
         <div class="card-header display-4">${ad.title}</div>
         <div class="card-body">
             <p class="card-text">${ad.description}</p>
+            <button type="button" class="btn btn-primary">Edit</button>
+            <button type="button" class="btn btn-danger">Delete</button>
         </div>
 <%--        <div class="card-footer text-muted">--%>
 <%--            ${ad.time}--%>
