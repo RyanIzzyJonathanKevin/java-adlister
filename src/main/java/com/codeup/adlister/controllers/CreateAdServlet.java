@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.List;
 
 @WebServlet(name = "controllers.CreateAdServlet", urlPatterns = "/ads/create")
@@ -31,10 +32,9 @@ public class CreateAdServlet extends HttpServlet {
             request.getParameter("description")
         );
 
-        request.getParameterValues("categoryCheckbox");
+        String[] categoriesArray = request.getParameterValues("categoryCheckbox");
 
-        DaoFactory.getCategoriesDao().insert();
-        DaoFactory.getAdsDao().insert(ad);
+        DaoFactory.getAdsDao().insert(ad, categoriesArray);
         response.sendRedirect("/ads");
     }
 }
