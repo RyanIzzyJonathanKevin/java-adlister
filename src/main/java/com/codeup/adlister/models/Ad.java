@@ -62,4 +62,15 @@ public class Ad {
     public void setCategories(List<String> categories) {
         this.categories = categories;
     }
+
+    @Override
+    public String toString() {
+        return "Ad{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", categories=" + categories +
+                '}';
+    }
 }
