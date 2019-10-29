@@ -18,7 +18,7 @@ public class MySQLAdsDao implements Ads {
             DriverManager.registerDriver(new Driver());
             connection = DriverManager.getConnection(
                 config.getUrl(),
-                config.getUser(),
+                config.getUsername(),
                 config.getPassword()
             );
         } catch (SQLException e) {
@@ -35,6 +35,28 @@ public class MySQLAdsDao implements Ads {
             return createAdsFromResults(rs);
         } catch (SQLException e) {
             throw new RuntimeException("Error retrieving all ads.", e);
+        }
+    }
+
+    @Override
+    public List<String> findCategory(long id) {
+        PreparedStatement stmt = null;
+
+        try{
+            String query = "SELECT category FROM categories JOIN ad_category ON category_ad.category_id = categories.id" +
+                    "JOIN ads ON ads.id = ad_category.ad_id WHERE id = ? ";
+
+
+            stmt = connection.prepareStatement(query);
+
+            stmt.setLong(1, id);
+
+            ResultSet rs = stmt.executeQuery();
+
+
+
+        } catch(SQLException e) {
+            throw new RuntimeException("Error finding the categories.", e);
         }
     }
 
@@ -56,11 +78,13 @@ public class MySQLAdsDao implements Ads {
     }
 
     private Ad extractAd(ResultSet rs) throws SQLException {
+
         return new Ad(
             rs.getLong("id"),
             rs.getLong("user_id"),
             rs.getString("title"),
-            rs.getString("description")
+            rs.getString("description"),
+                (findCategory(rs.getLong("id")))
         );
     }
 
