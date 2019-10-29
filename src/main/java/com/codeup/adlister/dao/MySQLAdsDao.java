@@ -164,10 +164,10 @@ public class MySQLAdsDao implements Ads {
 
     private Ad extractAd(ResultSet rs) throws SQLException {
         return new Ad(
-                rs.getLong("id"),
-                rs.getLong("user_id"),
-                rs.getString("title"),
-                rs.getString("description")
+            rs.getLong("id"),
+            rs.getLong("users_id"),
+            rs.getString("title"),
+            rs.getString("description")
         );
     }
 
@@ -178,4 +178,21 @@ public class MySQLAdsDao implements Ads {
         }
         return ads;
     }
+
+    public Ad findAdById(long id) {
+        PreparedStatement ps = null;
+        try {
+            String insertQuery = "SELECT * FROM ads WHERE id = ?";
+            ps = connection.prepareStatement(insertQuery);
+            ps.setLong(1, id);
+            ResultSet rs = ps.executeQuery();
+            if(! rs.next()) {
+                return null;
+            }
+            return extractAd(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error retrieving current ad.", e);
+        }
+    }
+
 }
