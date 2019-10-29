@@ -1,5 +1,7 @@
 package com.codeup.adlister.models;
 
+import java.util.Date;
+
 public class Ad {
     private long id;
     private long userId;
