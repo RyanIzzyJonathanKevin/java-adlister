@@ -11,4 +11,14 @@ public interface Ads {
     Long insert(Ad ad);
     // get current ad
     Ad findAdById(long id);
+    // Find ad by title
+    List<Ad> findAdsBySearch(String search);
+    // Find ads by user id
+    List<Ad> findAdsByUserId(long id);
+    // Edit ad by id
+    Long editAd(Ad ad);
+    // Delete ad by id
+    Long deleteAd(long id);
+    // Find ads by category
+    List<Ad> findAdsByCategory(String category);
 }
