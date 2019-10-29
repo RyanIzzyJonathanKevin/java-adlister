@@ -15,9 +15,10 @@ public class MySQLAdsDao implements Ads {
         try {
             DriverManager.registerDriver(new Driver());
             connection = DriverManager.getConnection(
-                    config.getUrl(),
-                    config.getUser(),
-                    config.getPassword()
+                config.getUrl(),
+                config.getUsername(),
+                config.getPassword()
+
             );
         } catch (SQLException e) {
             throw new RuntimeException("Error connecting to the database!", e);
@@ -167,7 +168,8 @@ public class MySQLAdsDao implements Ads {
             rs.getLong("id"),
             rs.getLong("users_id"),
             rs.getString("title"),
-            rs.getString("description")
+            rs.getString("description"),
+                (DaoFactory.getCategoriesDao().findCategory(rs.getLong("id")))
         );
     }
 
@@ -178,7 +180,6 @@ public class MySQLAdsDao implements Ads {
         }
         return ads;
     }
-
     public Ad findAdById(long id) {
         PreparedStatement ps = null;
         try {
@@ -194,5 +195,4 @@ public class MySQLAdsDao implements Ads {
             throw new RuntimeException("Error retrieving current ad.", e);
         }
     }
-
 }
