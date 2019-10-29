@@ -34,6 +34,10 @@ public class CreateAdServlet extends HttpServlet {
 
         String[] categoriesArray = request.getParameterValues("categoryCheckbox");
 
+        for(String element: categoriesArray) {
+            System.out.println(element);
+        }
+
         DaoFactory.getAdsDao().insert(ad, categoriesArray);
         response.sendRedirect("/ads");
     }

@@ -6,6 +6,7 @@ import com.mysql.cj.jdbc.Driver;
 import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MySQLCategoriesDao implements Categories {
@@ -57,20 +58,39 @@ public class MySQLCategoriesDao implements Categories {
     } //findCategory()
 
     @Override
-    public long insert(long id) {
+    public void insert(long id, String[] categoriesArray) {
         try {
+
         String insertQuery = "INSERT INTO ad_category(ad_id, category_id) VALUES (?, ?)";
+
         PreparedStatement stmt = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
 
+        List<Long> longList = convertToLong(categoriesArray);
 
-        stmt.setLong(1, id);
-        stmt.setLong(2, )
-
-
+        for(Long element : longList) {
+            stmt.setLong(1, id);
+            stmt.setLong(2, element);
+            stmt.executeQuery();
+        }
 
         } catch(SQLException e) {
             throw new RuntimeException("Unable to add categories", e);
         }
+
+
+    }
+
+    private List<Long> convertToLong(String[] categoriesArray) {
+        List<Long> longArray = new ArrayList<>();
+
+        for(String element : categoriesArray) {
+            Long num = Long.parseLong(element);
+            longArray.add(num);
+        }
+
+        return longArray;
+
+
     }
 
 
