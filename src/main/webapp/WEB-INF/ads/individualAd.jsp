@@ -15,8 +15,10 @@
         <div class="card-header display-4">${ad.title}</div>
         <div class="card-body">
             <p class="card-text">${ad.description}</p>
-            <button type="button" class="btn btn-primary">Edit</button>
-            <a href="/ad/delete?id=${ad.id}" class="btn btn-danger">Delete</a>
+            <c:if test="${user.id == ad.userId}">
+                <button type="button" class="btn btn-primary">Edit</button>
+                <a href="/ad/delete?id=${ad.id}" class="btn btn-danger">Delete</a>
+            </c:if>
         </div>
 <%--        <div class="card-footer text-muted">--%>
 <%--            ${ad.time}--%>
