@@ -16,7 +16,7 @@ public class MySQLAdsDao implements Ads {
             DriverManager.registerDriver(new Driver());
             connection = DriverManager.getConnection(
                     config.getUrl(),
-                    config.getUserName(),
+                    config.getUsername(),
                     config.getPassword()
             );
         } catch (SQLException e) {
@@ -120,7 +120,7 @@ public class MySQLAdsDao implements Ads {
     }
 
     @Override
-    public Long deleteAd(long id) {
+    public void deleteAd(long id) {
         try {
             // Query
             String query = "DELETE FROM ads WHERE id = ?";
@@ -129,16 +129,14 @@ public class MySQLAdsDao implements Ads {
             // Add id
             stmt.setLong(1, id);
 
+            // Delete categories first
+            DaoFactory.getCategoriesDao().deleteCategories(id);
+
             // Execute
             stmt.executeUpdate();
 
-            ResultSet rs = stmt.getGeneratedKeys();
-            rs.next();
-
-            // Return row deleted
-            return rs.getLong(1);
         } catch (SQLException e) {
-            throw new RuntimeException("Error editing ad by id", e);
+            throw new RuntimeException("Error deleting ad by id", e);
         }
     }
 
@@ -167,7 +165,8 @@ public class MySQLAdsDao implements Ads {
             rs.getLong("id"),
             rs.getLong("user_id"),
             rs.getString("title"),
-            rs.getString("description")
+            rs.getString("description"),
+                (DaoFactory.getCategoriesDao().findCategory(rs.getLong("id")))
         );
     }
 
@@ -178,7 +177,6 @@ public class MySQLAdsDao implements Ads {
         }
         return ads;
     }
-
     public Ad findAdById(long id) {
         PreparedStatement ps = null;
         try {
@@ -194,5 +192,4 @@ public class MySQLAdsDao implements Ads {
             throw new RuntimeException("Error retrieving current ad.", e);
         }
     }
-
 }
