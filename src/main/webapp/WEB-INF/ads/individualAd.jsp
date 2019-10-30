@@ -16,7 +16,7 @@
         <div class="card-body">
             <p class="card-text">${ad.description}</p>
             <button type="button" class="btn btn-primary">Edit</button>
-            <button type="button" class="btn btn-danger">Delete</button>
+            <a href="/ad/delete?id=${ad.id}" class="btn btn-danger">Delete</a>
         </div>
 <%--        <div class="card-footer text-muted">--%>
 <%--            ${ad.time}--%>
