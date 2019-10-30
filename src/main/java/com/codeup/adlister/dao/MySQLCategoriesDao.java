@@ -1,6 +1,7 @@
 package com.codeup.adlister.dao;
 
 
+import com.codeup.adlister.models.Ad;
 import com.mysql.cj.jdbc.Driver;
 
 import javax.xml.transform.Result;
@@ -58,17 +59,17 @@ public class MySQLCategoriesDao implements Categories {
     } //findCategory()
 
     @Override
-    public void insert(long id, String[] categoriesArray) {
+    public void insert(long id, Ad ad) {
         try {
-            List<Long> longList = convertToLong(categoriesArray);
 
-        for(Long element : longList) {
+
+        for(String element : ad.getCategories()) {
             String insertQuery = "INSERT INTO ad_category(ad_id, category_id) VALUES (?, ?)";
 
             PreparedStatement stmt = connection.prepareStatement(insertQuery);
 
             stmt.setLong(1, id);
-            stmt.setLong(2, element);
+            stmt.setLong(2, Long.parseLong(element));
             stmt.executeUpdate();
         }
 
@@ -76,19 +77,6 @@ public class MySQLCategoriesDao implements Categories {
         } catch(SQLException e) {
             throw new RuntimeException("Unable to add categories", e);
         }
-
-
-    }
-
-    private List<Long> convertToLong(String[] categoriesArray) {
-        List<Long> longArray = new ArrayList<>();
-
-        for(String element : categoriesArray) {
-            Long num = Long.parseLong(element);
-            longArray.add(num);
-        }
-
-        return longArray;
 
 
     }

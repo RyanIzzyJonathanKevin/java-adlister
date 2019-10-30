@@ -38,7 +38,7 @@ public class MySQLAdsDao implements Ads {
     }
 
     @Override
-    public Long insert(Ad ad, String[] categoriesArray) {
+    public Long insert(Ad ad) {
         try {
             String insertQuery = "INSERT INTO ads(user_id, title, description) VALUES (?, ?, ?)";
             PreparedStatement stmt = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
@@ -51,7 +51,7 @@ public class MySQLAdsDao implements Ads {
 
             rs.next();
 
-            DaoFactory.getCategoriesDao().insert(rs.getLong(1), categoriesArray);
+            DaoFactory.getCategoriesDao().insert(rs.getLong(1), ad);
 
             return rs.getLong(1);
         } catch (SQLException e) {
