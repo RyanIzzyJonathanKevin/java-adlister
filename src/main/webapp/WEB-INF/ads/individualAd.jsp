@@ -23,7 +23,7 @@
             <hr>
           
             <c:if test="${user.id == ad.userId}">
-                <button type="button" class="btn btn-primary">Edit</button>
+                <a href="/ads/update?id=${ad.id}" class="btn btn-primary">Edit</a>
                 <a href="/ad/delete?id=${ad.id}" class="btn btn-danger">Delete</a>
             </c:if>
 

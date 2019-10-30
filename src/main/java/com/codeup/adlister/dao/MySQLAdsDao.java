@@ -100,10 +100,10 @@ public class MySQLAdsDao implements Ads {
     }
 
     @Override
-    public Long editAd(Ad ad) {
+    public void editAd(Ad ad) {
         try {
             // Query
-            String query = "UPDATE ads SET title = ?, description = ?, WHERE id = ?";
+            String query = "UPDATE ads SET title = ?, description = ? WHERE id = ?";
             PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
             // Add information
@@ -115,10 +115,7 @@ public class MySQLAdsDao implements Ads {
             stmt.executeUpdate();
 
             ResultSet rs = stmt.getGeneratedKeys();
-            rs.next();
 
-            // Return row updated
-            return rs.getLong(1);
         } catch (SQLException e) {
             throw new RuntimeException("Error editing ad by id", e);
         }

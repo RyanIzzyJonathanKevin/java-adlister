@@ -16,7 +16,7 @@ public interface Ads {
     // Find ads by user id
     List<Ad> findAdsByUserId(long id);
     // Edit ad by id
-    Long editAd(Ad ad);
+    void editAd(Ad ad);
     // Delete ad by id
     void deleteAd(long id);
     // Find ads by category
