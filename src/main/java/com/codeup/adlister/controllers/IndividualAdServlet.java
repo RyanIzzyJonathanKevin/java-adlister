@@ -17,6 +17,9 @@ public class IndividualAdServlet extends HttpServlet {
         if(request.getParameter("id") != null){
             long id = Long.parseLong(request.getParameter("id"));
             if(DaoFactory.getAdsDao().findAdById(id) != null) {
+                if (request.getSession().getAttribute("user") != null) {
+                    request.setAttribute("user", request.getSession().getAttribute("user"));
+                }
                 request.setAttribute("ad", DaoFactory.getAdsDao().findAdById(id));
                 request.getRequestDispatcher("/WEB-INF/ads/individualAd.jsp")
                         .forward(request, response);
