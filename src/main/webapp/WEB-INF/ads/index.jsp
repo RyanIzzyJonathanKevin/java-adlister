@@ -15,8 +15,14 @@
         <div class="card text-center my-3" style="width: 18rem;">
             <div class="card-body">
                 <h5 class="card-title">${ad.title}</h5>
+                <c:forEach var="cat" items="${ad.categories}">
+                    <span class="badge badge-light mb-1">${cat}</span>
+                </c:forEach>
+                <hr>
                 <p class="card-text">${ad.description}</p>
                 <a href="/ad?id=${ad.id}" class="btn btn-primary">Go to Ad</a>
+
+
             </div>
         </div>
     </c:forEach>
