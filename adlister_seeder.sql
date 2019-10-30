@@ -1,7 +1,3 @@
-
-
-use adlister_db;
-
 insert into users (username, email, password) values ('sdellenbroker0', 'kmote0@cam.ac.uk', '1Drj3sScPJDq');
 insert into users (username, email, password) values ('kpotteridge1', 'cedis1@istockphoto.com', 'Ge7zBXyvWn');
 insert into users (username, email, password) values ('rmcairt2', 'rkillner2@ocn.ne.jp', 'yveKmY');
@@ -24,6 +20,7 @@ insert into ads (user_id, title, description) values (8, 'June Cant come Soon En
 insert into ads (user_id, title, description) values (4, 'BigglesWorth', 'ultricies lacus sed turpis tincidunt id aliquet risus feugiat in ante metus dictum at tempor commodo ullamcorper a lacus vestibulum sed arcu non odio euismod lacinia at quis risus sed vulputate odio ut enim blandit volutpat maecenas volutpat blandit aliquam etiam erat velit ');
 insert into ads (user_id, title, description) values (10, 'Monologues by Smart People', 'ultricies lacus sed turpis tincidunt id aliquet risus feugiat in ante metus dictum at tempor commodo ullamcorper a lacus vestibulum sed arcu non odio euismod lacinia at quis risus sed vulputate odio ut enim blandit volutpat maecenas volutpat blandit aliquam etiam erat velit ');
 
+use adlister_db;
 INSERT INTO categories( category) VALUES ('Concert'),
                                          ('Movie'),
                                          ('Charity'),
@@ -45,9 +42,6 @@ INSERT INTO ad_category(ad_id, category_id) values(1,1),
                                                    (10, 4);
 
 
--- SELECT title from ads
--- Join users on users.id = ads.user_id
--- where username = 'dkaret3';
-
-SELECT category FROM categories JOIN ad_category ON category_ad.category_id = categories.id" +
-                    "JOIN ads ON ads.id = ad_category.ad_id WHERE ads.id = 1;
+SELECT title from ads
+Join users on users.id = ads.user_id
+where username = 'dkaret3';

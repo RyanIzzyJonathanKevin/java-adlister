@@ -8,4 +8,7 @@ public interface Categories {
     List<String> findCategory(long id);
 
     void insert(long id, Ad ad);
+
+    void deleteCategories(long id);
+
 }
