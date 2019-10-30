@@ -81,10 +81,6 @@ public class MySQLCategoriesDao implements Categories {
 
     }
 
-
-
-}//MySQLCategoriesDao Class
-
     @Override
     public void deleteCategories(long id) {
         try{
@@ -98,5 +94,9 @@ public class MySQLCategoriesDao implements Categories {
             throw new RuntimeException("Error deleting categories",e);
         }
     }
+
 }
+
+
+
 
