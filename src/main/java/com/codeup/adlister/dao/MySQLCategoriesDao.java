@@ -1,10 +1,13 @@
 package com.codeup.adlister.dao;
 
 
+import com.codeup.adlister.models.Ad;
 import com.mysql.cj.jdbc.Driver;
 
+import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MySQLCategoriesDao implements Categories {
@@ -22,7 +25,7 @@ public class MySQLCategoriesDao implements Categories {
         } catch (SQLException e) {
             throw new RuntimeException("Error connecting to the database!", e);
         }
-    }
+    } //MySQLCategories
 
     @Override
     public List<String> findCategory(long id) {
@@ -53,7 +56,34 @@ public class MySQLCategoriesDao implements Categories {
         }
 
         return categories;
+    } //findCategory()
+
+    @Override
+    public void insert(long id, Ad ad) {
+        try {
+
+
+        for(String element : ad.getCategories()) {
+            String insertQuery = "INSERT INTO ad_category(ad_id, category_id) VALUES (?, ?)";
+
+            PreparedStatement stmt = connection.prepareStatement(insertQuery);
+
+            stmt.setLong(1, id);
+            stmt.setLong(2, Long.parseLong(element));
+            stmt.executeUpdate();
+        }
+
+
+        } catch(SQLException e) {
+            throw new RuntimeException("Unable to add categories", e);
+        }
+
+
     }
+
+
+
+}//MySQLCategoriesDao Class
 
     @Override
     public void deleteCategories(long id) {
@@ -69,3 +99,4 @@ public class MySQLCategoriesDao implements Categories {
         }
     }
 }
+
