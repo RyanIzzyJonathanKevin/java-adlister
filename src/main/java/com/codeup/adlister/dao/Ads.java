@@ -18,7 +18,7 @@ public interface Ads {
     // Edit ad by id
     Long editAd(Ad ad);
     // Delete ad by id
-    Long deleteAd(long id);
+    void deleteAd(long id);
     // Find ads by category
     List<Ad> findAdsByCategory(String category);
 }

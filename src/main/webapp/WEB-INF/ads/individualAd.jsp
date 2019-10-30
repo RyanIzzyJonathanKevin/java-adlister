@@ -11,14 +11,25 @@
 <jsp:include page="/WEB-INF/partials/navbar.jsp" />
 
 <div class="container">
-    <h1>Here is your ad!</h1>
-
-        <div class="col-md-6">
-            <h2>${ad.title}</h2>
-            <p>${ad.description}</p>
+    <div class="card text-center">
+        <div class="card-header display-4">${ad.title}</div>
+        <div class="card-body">
+            <p class="card-text">${ad.description}</p>
+            <button type="button" class="btn btn-primary">Edit</button>
+            <a href="/ad/delete?id=${ad.id}" class="btn btn-danger">Delete</a>
         </div>
-
+<%--        <div class="card-footer text-muted">--%>
+<%--            ${ad.time}--%>
+<%--        </div>--%>
+    </div>
 </div>
+
+
+
+
+
+
+
 
 </body>
 </html>

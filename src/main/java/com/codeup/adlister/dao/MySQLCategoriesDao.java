@@ -54,4 +54,18 @@ public class MySQLCategoriesDao implements Categories {
 
         return categories;
     }
+
+    @Override
+    public void deleteCategories(long id) {
+        try{
+            String query = "DELETE FROM ad_category WHERE ad_id = ?";
+            PreparedStatement stmt = connection.prepareStatement(query);
+
+            stmt.setLong(1,id);
+
+            stmt.executeUpdate();
+        }catch (SQLException e){
+            throw new RuntimeException("Error deleting categories",e);
+        }
+    }
 }
