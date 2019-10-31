@@ -21,7 +21,6 @@
                 <span class="badge badge-light mb-1">${cat}</span>
             </c:forEach>
             <hr>
-          
             <c:if test="${user.id == ad.userId}">
                 <button type="button" class="btn btn-primary">Edit</button>
                 <a href="/ad/delete?id=${ad.id}" class="btn btn-danger">Delete</a>
