@@ -21,8 +21,6 @@
                 <hr>
                 <p class="card-text">${ad.description}</p>
                 <a href="/ad?id=${ad.id}" class="btn btn-primary">Go to Ad</a>
-
-
             </div>
         </div>
     </c:forEach>
