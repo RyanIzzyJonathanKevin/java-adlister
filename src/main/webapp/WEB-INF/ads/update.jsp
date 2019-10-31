@@ -17,8 +17,8 @@
 <jsp:include page="/WEB-INF/partials/navbar.jsp" />    <div class="container">
 
 
-    <p class="text-danger">${sessionScope.error}</p>
     <h1>Edit Your Ad</h1>
+    <p class="text-danger">${sessionScope.error}</p>
     <form action="/ads/update" method="post">
         <div class="form-group">
             <label  for="update-title">Title</label>

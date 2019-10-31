@@ -9,6 +9,7 @@
 <body>
 <jsp:include page="/WEB-INF/partials/navbar.jsp" />    <div class="container">
         <h1>Create a new Ad</h1>
+        <p class="text-danger">${sessionScope.error}</p>
         <form action="/ads/create" method="post">
             <div class="form-group">
                 <label for="title">Title</label>
@@ -17,6 +18,10 @@
             <div class="form-group">
                 <label for="description">Description</label>
                 <textarea id="description" name="description" class="form-control" type="text"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input id="location" name="location" class="form-control" type="text">
             </div>
 
 <%--            Category Checkbox--%>

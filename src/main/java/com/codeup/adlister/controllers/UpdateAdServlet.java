@@ -40,14 +40,18 @@ public class UpdateAdServlet extends HttpServlet {
             String id = (request.getParameter("id"));
 
             long longId = Long.parseLong(request.getParameter("id"));
-            User user = (User) request.getSession().getAttribute("user");
+      
+        User user = (User)request.getSession().getAttribute("user");
+
         if(request.getParameter("title") != null && request.getParameter("description") != null && request.getParameterValues("categoryCheckbox") != null) {
             Ad ad = new Ad(
                     longId,
                     user.getId(),
                     request.getParameter("title"),
                     request.getParameter("description"),
-                    Arrays.asList(request.getParameterValues("categoryCheckbox"))
+                    Arrays.asList(request.getParameterValues("categoryCheckbox")),
+                    25,
+                    25
             );
 
             DaoFactory.getCategoriesDao().deleteCategories(longId);
