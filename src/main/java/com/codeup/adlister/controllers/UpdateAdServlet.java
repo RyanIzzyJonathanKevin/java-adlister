@@ -41,7 +41,7 @@ public class UpdateAdServlet extends HttpServlet {
 
             long longId = Long.parseLong(request.getParameter("id"));
 
-        if(request.getParameter("title") != null && request.getParameter("description") != null && request.getParameterValues("categoryCheckbox") != null) {
+//        if(request.getParameter("title") != null && request.getParameter("description") != null && request.getParameterValues("categoryCheckbox") != null) {
             Ad ad = new Ad(
                     longId,
                     request.getParameter("title"),
@@ -50,15 +50,16 @@ public class UpdateAdServlet extends HttpServlet {
             );
             DaoFactory.getCategoriesDao().deleteCategories(longId);
             DaoFactory.getAdsDao().editAd(ad);
+            DaoFactory.getCategoriesDao().insert(longId, ad);
             response.sendRedirect("/ad?id=" + id);
 
 //            request.getSession().setAttribute("error", null);
 
 
-        } else {
-            request.getSession().setAttribute("error", "Please fill in all required fields");
-            response.sendRedirect("/ads/update?id=" + id);
+//        } else {
+//            request.getSession().setAttribute("error", "Please fill in all required fields");
+//            response.sendRedirect("/ads/update?id=" + id);
         }
 
     }
-}
+//}
