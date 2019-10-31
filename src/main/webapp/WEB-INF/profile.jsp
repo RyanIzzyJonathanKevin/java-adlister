@@ -11,23 +11,34 @@
     <jsp:include page="/WEB-INF/partials/navbar.jsp" />
 
     <div class="container">
-        <h1>Welcome, ${sessionScope.user.username}!</h1>
+        <div class="row">
+            <div class="col-4">
+                <h1>Welcome, ${sessionScope.user.username}!</h1>
+                <img src="http://placehold.jp/300x300.png" alt="Placeholder Image">
+                <h5>Username</h5>
+                <p>${sessionScope.user.username}</p>
+                <h5>Email</h5>
+                <p>${sessionScope.user.email}</p>
+            </div>
 
-        <c:if test="${user.id == ad.userId}">
+            <div class="col-8 border-left">
             <c:forEach var="ad" items="${ads}">
-                <div class="card text-center my-3" style="width: 18rem;">
+                <div class="card text-center my-3">
+                    <h3 class="card-header">${ad.title}</h3>
                     <div class="card-body">
-                        <h5 class="card-title">${ad.title}</h5>
+                        <p class="card-text">${ad.description}</p>
+
                         <c:forEach var="cat" items="${ad.categories}">
                             <span class="badge badge-light mb-1">${cat}</span>
                         </c:forEach>
                         <hr>
-                        <p class="card-text">${ad.description}</p>
-                        <a href="/ad?id=${ad.id}" class="btn btn-primary">Go to Ad</a>
+                            <button type="button" class="btn btn-primary">Edit</button>
+                            <a href="/ad/delete?id=${ad.id}" class="btn btn-danger">Delete</a>
                     </div>
                 </div>
             </c:forEach>
-        </c:if>
+            </div>
+        </div>
 
     </div>
 
