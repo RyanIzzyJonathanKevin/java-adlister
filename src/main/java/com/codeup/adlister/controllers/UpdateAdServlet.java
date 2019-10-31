@@ -17,6 +17,10 @@ public class UpdateAdServlet extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if(request.getSession().getAttribute("error") != null) {
+            request.getSession().setAttribute("error", null);
+        }
+
         if(request.getParameter("id") != null){
            long id = Long.parseLong(request.getParameter("id"));
             if(DaoFactory.getAdsDao().findAdById(id) != null) {
@@ -31,6 +35,7 @@ public class UpdateAdServlet extends HttpServlet {
             }
             response.sendRedirect("/ads");
         }
+
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -51,6 +56,7 @@ public class UpdateAdServlet extends HttpServlet {
             DaoFactory.getCategoriesDao().deleteCategories(longId);
 
         } else {
+            request.getSession().setAttribute("error", "Please fill in all required fields");
             response.sendRedirect("/ads/update?id=" + id);
         }
 
