@@ -17,6 +17,8 @@ public class UpdateAdServlet extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+
         if(request.getParameter("id") != null){
            long id = Long.parseLong(request.getParameter("id"));
             if(DaoFactory.getAdsDao().findAdById(id) != null) {
@@ -24,26 +26,40 @@ public class UpdateAdServlet extends HttpServlet {
                     request.setAttribute("user", request.getSession().getAttribute("user"));
                 }
                 request.setAttribute("ad", DaoFactory.getAdsDao().findAdById(id));
+                request.setAttribute("categories", DaoFactory.getCategoriesDao().findCategory(id));
                 request.getRequestDispatcher("/WEB-INF/ads/update.jsp")
                         .forward(request, response);
                 return;
             }
             response.sendRedirect("/ads");
         }
+
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+            String id = (request.getParameter("id"));
 
-        String id = (request.getParameter("id"));
+            long longId = Long.parseLong(request.getParameter("id"));
 
-        Ad ad = new Ad(
-                Long.parseLong(request.getParameter("id")),
-                request.getParameter("title"),
-                request.getParameter("description")
-        );
+        if(request.getParameter("title") != null && request.getParameter("description") != null && request.getParameterValues("categoryCheckbox") != null) {
+            Ad ad = new Ad(
+                    longId,
+                    request.getParameter("title"),
+                    request.getParameter("description"),
+                    Arrays.asList(request.getParameterValues("categoryCheckbox"))
+            );
+            DaoFactory.getCategoriesDao().deleteCategories(longId);
+            DaoFactory.getAdsDao().editAd(ad);
+            DaoFactory.getCategoriesDao().insert(longId, ad);
+            response.sendRedirect("/ad?id=" + id);
 
-        DaoFactory.getAdsDao().editAd(ad);
-        response.sendRedirect("/ad?id=" + id);
+            request.getSession().setAttribute("error", null);
+
+
+        } else {
+            request.getSession().setAttribute("error", "Please fill in all required fields");
+            response.sendRedirect("/ads/update?id=" + id);
+        }
 
     }
 }

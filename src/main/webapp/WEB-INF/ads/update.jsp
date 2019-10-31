@@ -15,6 +15,9 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/partials/navbar.jsp" />    <div class="container">
+
+
+    <p class="text-danger">${sessionScope.error}</p>
     <h1>Edit Your Ad</h1>
     <form action="/ads/update" method="post">
         <div class="form-group">
@@ -28,30 +31,31 @@
         </div>
 
         <%--            Category Checkbox--%>
-<%--        <div class="form-check form-check-inline">--%>
-<%--            <input class="form-check-input" type="checkbox" name="categoryCheckbox" id="concert" value="1">--%>
-<%--            <label class="form-check-label" for="concert">Concert</label>--%>
-<%--        </div>--%>
-<%--        <div class="form-check form-check-inline">--%>
-<%--            <input class="form-check-input" type="checkbox" name="categoryCheckbox" id="movie" value="2">--%>
-<%--            <label class="form-check-label" for="movie">Movie</label>--%>
-<%--        </div>--%>
-<%--        <div class="form-check form-check-inline">--%>
-<%--            <input class="form-check-input" type="checkbox" name="categoryCheckbox" id="charity" value="3">--%>
-<%--            <label class="form-check-label" for="charity">Charity</label>--%>
-<%--        </div>--%>
-<%--        <div class="form-check form-check-inline">--%>
-<%--            <input class="form-check-input" type="checkbox" name="categoryCheckbox" id="sports" value="4">--%>
-<%--            <label class="form-check-label" for="sports">sports</label>--%>
-<%--        </div>--%>
-<%--        <div class="form-check form-check-inline">--%>
-<%--            <input class="form-check-input" type="checkbox" name="categoryCheckbox" id="musical" value="5">--%>
-<%--            <label class="form-check-label" for="musical">musical</label>--%>
-<%--        </div>--%>
-<%--        <div class="form-check form-check-inline">--%>
-<%--            <input class="form-check-input" type="checkbox" name="categoryCheckbox" id="arts" value="6">--%>
-<%--            <label class="form-check-label" for="arts">arts</label>--%>
-<%--        </div>--%>
+        <p>Please select categories</p>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input " type="checkbox" name="categoryCheckbox" id="concert" value="1">
+            <label class="form-check-label" for="concert">Concert</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" name="categoryCheckbox" id="movie" value="2">
+            <label class="form-check-label" for="movie">Movie</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" name="categoryCheckbox" id="charity" value="3">
+            <label class="form-check-label" for="charity">Charity</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" name="categoryCheckbox" id="sports" value="4">
+            <label class="form-check-label" for="sports">sports</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" name="categoryCheckbox" id="musical" value="5">
+            <label class="form-check-label" for="musical">musical</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" name="categoryCheckbox" id="arts" value="6">
+            <label class="form-check-label" for="arts">arts</label>
+        </div>
         <input type="submit" class="btn btn-block btn-primary">
     </form>
 </div>
