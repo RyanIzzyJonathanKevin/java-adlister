@@ -36,14 +36,19 @@ public class UpdateAdServlet extends HttpServlet {
 
         String id = (request.getParameter("id"));
 
+        long longId = Long.parseLong(request.getParameter("id"));
+
         Ad ad = new Ad(
-                Long.parseLong(request.getParameter("id")),
+                longId,
                 request.getParameter("title"),
-                request.getParameter("description")
+                request.getParameter("description"),
+                Arrays.asList(request.getParameterValues("categoryCheckbox"))
         );
 
         DaoFactory.getAdsDao().editAd(ad);
         response.sendRedirect("/ad?id=" + id);
+
+        DaoFactory.getCategoriesDao().deleteCategories(longId);
 
     }
 }

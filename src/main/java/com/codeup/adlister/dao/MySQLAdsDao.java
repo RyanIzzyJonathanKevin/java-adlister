@@ -110,6 +110,7 @@ public class MySQLAdsDao implements Ads {
             stmt.setString(1, ad.getTitle());
             stmt.setString(2, ad.getDescription());
             stmt.setLong(3, ad.getId());
+            DaoFactory.getCategoriesDao().insert(ad.getId(), ad);
 
             // Execute
             stmt.executeUpdate();
