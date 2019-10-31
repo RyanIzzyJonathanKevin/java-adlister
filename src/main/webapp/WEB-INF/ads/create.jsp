@@ -19,7 +19,10 @@
                 <label for="description">Description</label>
                 <textarea id="description" name="description" class="form-control" type="text"></textarea>
             </div>
-
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input id="location" name="location" class="form-control" type="text">
+            </div>
 
 <%--            Category Checkbox--%>
             <div class="form-check form-check-inline">

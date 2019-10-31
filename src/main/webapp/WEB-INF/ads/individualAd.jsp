@@ -28,13 +28,11 @@
 
         </div>
     </div>
+    <div style="width: 100%; height: 500px" id="map"></div>
+
 </div>
-
-
-
-
-
-
-
-</body>
+<script src="/static/js/keys.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzaeV4w3j9zQXWGSJ9tBkIH00rZzO0m4E&callback=initMap" async defer></script>
+        <script src="/static/map"></script>
+    </body>
 </html>
