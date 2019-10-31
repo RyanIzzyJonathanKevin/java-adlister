@@ -13,6 +13,12 @@ public class Ad {
 
     public Ad(){};
 
+    public Ad(long id, String title, String description){
+        this.id = id;
+        this.title = title;
+        this.description = description;
+    }
+
     public Ad(long id, long userId, String title, String description, List<String> categories) {
         this.id = id;
         this.userId = userId;
