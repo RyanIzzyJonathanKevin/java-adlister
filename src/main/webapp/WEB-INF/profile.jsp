@@ -32,15 +32,13 @@
                             <span class="badge badge-light mb-1">${cat}</span>
                         </c:forEach>
                         <hr>
-                            <button type="button" class="btn btn-primary">Edit</button>
+                            <a href="/ads/update?id=${ad.id}" class="btn btn-primary">Edit</a>
                             <a href="/ad/delete?id=${ad.id}" class="btn btn-danger">Delete</a>
                     </div>
                 </div>
             </c:forEach>
             </div>
         </div>
-
     </div>
-
 </body>
 </html>
