@@ -29,7 +29,10 @@
             <label for="update-description">Description</label>
             <textarea id="update-description" name="description" class="form-control"  type="text">${ad.description}</textarea>
         </div>
-
+        <div class="form-group">
+            <label for="location">Location</label>
+            <input id="location" name="location" class="form-control" type="text">
+        </div>
         <%--            Category Checkbox--%>
         <p>Please select categories</p>
         <div class="form-check form-check-inline">
