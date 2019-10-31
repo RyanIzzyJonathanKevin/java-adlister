@@ -17,9 +17,7 @@ public class UpdateAdServlet extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if(request.getSession().getAttribute("error") != null) {
-            request.getSession().setAttribute("error", null);
-        }
+
 
         if(request.getParameter("id") != null){
            long id = Long.parseLong(request.getParameter("id"));
@@ -44,16 +42,18 @@ public class UpdateAdServlet extends HttpServlet {
             long longId = Long.parseLong(request.getParameter("id"));
 
         if(request.getParameter("title") != null && request.getParameter("description") != null && request.getParameterValues("categoryCheckbox") != null) {
-
             Ad ad = new Ad(
                     longId,
                     request.getParameter("title"),
                     request.getParameter("description"),
                     Arrays.asList(request.getParameterValues("categoryCheckbox"))
             );
+            DaoFactory.getCategoriesDao().deleteCategories(longId);
             DaoFactory.getAdsDao().editAd(ad);
             response.sendRedirect("/ad?id=" + id);
-            DaoFactory.getCategoriesDao().deleteCategories(longId);
+
+//            request.getSession().setAttribute("error", null);
+
 
         } else {
             request.getSession().setAttribute("error", "Please fill in all required fields");
