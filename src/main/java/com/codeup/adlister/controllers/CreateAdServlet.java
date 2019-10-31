@@ -40,17 +40,16 @@ public class CreateAdServlet extends HttpServlet {
         GeocodingResult[] results = new GeocodingResult[0];
 
         try {
-            results = GeocodingApi.geocode(context,
-                    request.getParameter("location")).await();
+            results = GeocodingApi.geocode(context, request.getParameter("location")).await();
         } catch (ApiException | InterruptedException e) {
             e.printStackTrace();
         }
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-      
+
         double lat = Double.parseDouble(gson.toJson(results[0].geometry.location.lat));
         double lon = Double.parseDouble(gson.toJson(results[0].geometry.location.lng));
-      
+
 
         if (request.getParameter("title") != null && request.getParameter("description") != null && request.getParameterValues("categoryCheckbox") != null) {
             Ad ad = new Ad(
@@ -64,7 +63,7 @@ public class CreateAdServlet extends HttpServlet {
 
             DaoFactory.getAdsDao().insert(ad);
             response.sendRedirect("/profile");
-        }else {
+        } else {
             request.getSession().setAttribute("error", "Please fill in all required fields");
             response.sendRedirect("/ads/create");
         }

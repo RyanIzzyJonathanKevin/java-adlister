@@ -3,6 +3,12 @@ package com.codeup.adlister.controllers;
 import com.codeup.adlister.dao.DaoFactory;
 import com.codeup.adlister.models.Ad;
 import com.codeup.adlister.models.User;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.maps.GeoApiContext;
+import com.google.maps.GeocodingApi;
+import com.google.maps.errors.ApiException;
+import com.google.maps.model.GeocodingResult;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,13 +21,11 @@ import java.util.Arrays;
 @WebServlet(name = "controllers.UpdateAdServlet", urlPatterns = "/ads/update")
 public class UpdateAdServlet extends HttpServlet {
 
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
-        if(request.getParameter("id") != null){
-           long id = Long.parseLong(request.getParameter("id"));
-            if(DaoFactory.getAdsDao().findAdById(id) != null) {
+        if (request.getParameter("id") != null) {
+            long id = Long.parseLong(request.getParameter("id"));
+            if (DaoFactory.getAdsDao().findAdById(id) != null) {
                 if (request.getSession().getAttribute("user") != null) {
                     request.setAttribute("user", request.getSession().getAttribute("user"));
                 }
@@ -33,27 +37,45 @@ public class UpdateAdServlet extends HttpServlet {
             }
             response.sendRedirect("/ads");
         }
-
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-            String id = (request.getParameter("id"));
+        String id = (request.getParameter("id"));
 
-            long longId = Long.parseLong(request.getParameter("id"));
-      
-        User user = (User)request.getSession().getAttribute("user");
+        long longId = Long.parseLong(request.getParameter("id"));
 
-        if(request.getParameter("title") != null && request.getParameter("description") != null && request.getParameterValues("categoryCheckbox") != null) {
+        User user = (User) request.getSession().getAttribute("user");
+
+        if (request.getParameter("title") != null && request.getParameter("description") != null && request.getParameterValues("categoryCheckbox") != null && request.getParameter("location") != null) {
+
+            GeoApiContext context = new GeoApiContext.Builder()
+                    .apiKey("AIzaSyDzaeV4w3j9zQXWGSJ9tBkIH00rZzO0m4E")
+                    .build();
+            GeocodingResult[] results = new GeocodingResult[0];
+
+            try {
+                results = GeocodingApi.geocode(context, request.getParameter("location")).await();
+            } catch (ApiException | InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+            double lat = Double.parseDouble(gson.toJson(results[0].geometry.location.lat));
+            System.out.println("lat = " + lat);
+            double lon = Double.parseDouble(gson.toJson(results[0].geometry.location.lng));
+            System.out.println("lon = " + lon);
+            
             Ad ad = new Ad(
                     longId,
                     user.getId(),
                     request.getParameter("title"),
                     request.getParameter("description"),
                     Arrays.asList(request.getParameterValues("categoryCheckbox")),
-                    25,
-                    25
+                    lat,
+                    lon
             );
-
+            System.out.println("ad = " + ad);
             DaoFactory.getCategoriesDao().deleteCategories(longId);
             DaoFactory.getAdsDao().editAd(ad);
             DaoFactory.getCategoriesDao().insert(longId, ad);
@@ -61,11 +83,9 @@ public class UpdateAdServlet extends HttpServlet {
 
             request.getSession().setAttribute("error", null);
 
-
         } else {
             request.getSession().setAttribute("error", "Please fill in all required fields");
             response.sendRedirect("/ads/update?id=" + id);
         }
-
     }
 }
