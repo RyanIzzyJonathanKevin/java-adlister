@@ -27,15 +27,21 @@ public class CreateAdServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user = (User) request.getSession().getAttribute("user");
-        Ad ad = new Ad(
-            user.getId(),
-            request.getParameter("title"),
-            request.getParameter("description"),
-                Arrays.asList(request.getParameterValues("categoryCheckbox"))
-        );
+
+        if (request.getParameter("title") != null && request.getParameter("description") != null && request.getParameterValues("categoryCheckbox") != null) {
+            Ad ad = new Ad(
+                    user.getId(),
+                    request.getParameter("title"),
+                    request.getParameter("description"),
+                    Arrays.asList(request.getParameterValues("categoryCheckbox"))
+            );
 
 
-        DaoFactory.getAdsDao().insert(ad);
-        response.sendRedirect("/profile");
+            DaoFactory.getAdsDao().insert(ad);
+            response.sendRedirect("/profile");
+        }else {
+            request.getSession().setAttribute("error", "Please fill in all required fields");
+            response.sendRedirect("/ads/create");
+        }
     }
 }
