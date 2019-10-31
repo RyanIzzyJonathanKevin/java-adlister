@@ -12,9 +12,11 @@ public class Ad {
     private double lat;
     private double lon;
 
+    // Default constructor
     public Ad() {
     }
-
+  
+    // Constructor for getting from db
     public Ad(long id, long userId, String title, String description, List<String> categories, double lat, double lon) {
         this.id = id;
         this.userId = userId;
@@ -25,6 +27,8 @@ public class Ad {
         this.lon = lon;
     }
 
+    // Constructor for create ad servlet
+    // No id yet
     public Ad(long userId, String title, String description, List<String> categories, double lat, double lon) {
         this.userId = userId;
         this.title = title;

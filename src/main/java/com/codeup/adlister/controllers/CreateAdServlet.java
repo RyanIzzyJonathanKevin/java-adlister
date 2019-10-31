@@ -33,6 +33,7 @@ public class CreateAdServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user = (User) request.getSession().getAttribute("user");
 
+
         GeoApiContext context = new GeoApiContext.Builder()
                 .apiKey("AIzaSyDzaeV4w3j9zQXWGSJ9tBkIH00rZzO0m4E")
                 .build();
@@ -46,20 +47,27 @@ public class CreateAdServlet extends HttpServlet {
         }
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
+      
         double lat = Double.parseDouble(gson.toJson(results[0].geometry.location.lat));
         double lon = Double.parseDouble(gson.toJson(results[0].geometry.location.lng));
+      
 
-        Ad ad = new Ad(
-                user.getId(),
-                request.getParameter("title"),
-                request.getParameter("description"),
-                Arrays.asList(request.getParameterValues("categoryCheckbox")),
-                lat,
-                lon
-        );
+        if (request.getParameter("title") != null && request.getParameter("description") != null && request.getParameterValues("categoryCheckbox") != null) {
+            Ad ad = new Ad(
+                    user.getId(),
+                    request.getParameter("title"),
+                    request.getParameter("description"),
+                    Arrays.asList(request.getParameterValues("categoryCheckbox")),
+                    lat,
+                    lon
+            );
 
-        DaoFactory.getAdsDao().insert(ad);
-        response.sendRedirect("/ads");
+            DaoFactory.getAdsDao().insert(ad);
+            response.sendRedirect("/profile");
+        }else {
+            request.getSession().setAttribute("error", "Please fill in all required fields");
+            response.sendRedirect("/ads/create");
+        }
+
     }
 }
