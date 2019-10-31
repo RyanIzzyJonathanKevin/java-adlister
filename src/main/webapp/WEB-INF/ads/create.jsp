@@ -20,6 +20,7 @@
                 <textarea id="description" name="description" class="form-control" type="text"></textarea>
             </div>
 
+
 <%--            Category Checkbox--%>
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="checkbox" name="categoryCheckbox" id="concert" value="1">
