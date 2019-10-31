@@ -27,9 +27,6 @@
             </c:if>
 
         </div>
-<%--        <div class="card-footer text-muted">--%>
-<%--            ${ad.time}--%>
-<%--        </div>--%>
     </div>
 </div>
 
