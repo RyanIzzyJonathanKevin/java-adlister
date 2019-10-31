@@ -48,7 +48,9 @@ public class UpdateAdServlet extends HttpServlet {
                     user.getId(),
                     request.getParameter("title"),
                     request.getParameter("description"),
-                    Arrays.asList(request.getParameterValues("categoryCheckbox"))
+                    Arrays.asList(request.getParameterValues("categoryCheckbox")),
+                    25,
+                    25
             );
             DaoFactory.getCategoriesDao().deleteCategories(longId);
             DaoFactory.getAdsDao().editAd(ad);

@@ -28,21 +28,7 @@ public class AdsIndexServlet extends HttpServlet {
 
         List<Ad> adSearch = DaoFactory.getAdsDao().findAdsBySearch(search);
 
-        response.sendRedirect("/ads?search=" + adSearch);
-
-
-    }
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String search = request.getParameter("search");
-
-        List<Ad> adSearch = DaoFactory.getAdsDao().findAdsBySearch(search);
-
         response.sendRedirect("ads/?search=" + adSearch);
-
-
-
-
 
     }
 }
