@@ -18,8 +18,8 @@ import static com.codeup.adlister.dao.DaoFactory.getAdsDao;
 public class AdsIndexServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        if(request.getQueryString() != null) {
-            request.setAttribute("ads", getAdsDao().findAdsBySearch(request.getQueryString()));
+        if(request.getParameter("search") != null) {
+            request.setAttribute("ads", getAdsDao().findAdsBySearch(request.getParameter("search")));
             request.getRequestDispatcher("/WEB-INF/ads/index.jsp").forward(request, response);
         } else {
             request.setAttribute("ads", getAdsDao().all());

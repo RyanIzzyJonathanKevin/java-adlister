@@ -5,13 +5,26 @@
     <jsp:include page="/WEB-INF/partials/head.jsp">
         <jsp:param name="title" value="Viewing All The Ads" />
     </jsp:include>
+    <style>
+        .form-control{
+            width: 100%;
+        }
+
+        .cont{
+            width: 100%;
+            display: flex;
+        }
+    </style>
 </head>
 <body>
 <jsp:include page="/WEB-INF/partials/navbar.jsp" />
 
 <form action="/ads">
-    <input type="text" class="form-control" name="search">
-    <button class="btn">Search</button>
+    <div class="cont">
+        <input type="text" class="form-control" name="search">
+        <button class="btn btn-primary">Search</button>
+    </div>
+
 </form>
 
 <div class="container d-flex flex-wrap justify-content-around">
