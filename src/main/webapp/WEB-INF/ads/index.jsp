@@ -9,12 +9,13 @@
 <body>
 <jsp:include page="/WEB-INF/partials/navbar.jsp" />
 
-<div class="container d-flex flex-wrap justify-content-around">
-    <form action="/ads">
-        <input type="text" name="search">
-        <button class="btn">Search</button>
+<form action="/ads">
+    <input type="text" class="form-control" name="search">
+    <button class="btn">Search</button>
+</form>
 
-    </form>
+<div class="container d-flex flex-wrap justify-content-around">
+
     <c:forEach var="ad" items="${ads}">
         <div class="card text-center my-3" style="width: 18rem;">
             <div class="card-body">

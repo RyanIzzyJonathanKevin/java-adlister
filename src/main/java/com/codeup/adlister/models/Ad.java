@@ -102,6 +102,8 @@ public class Ad {
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", categories=" + categories +
+                ", lat=" + lat +
+                ", lon=" + lon +
                 '}';
     }
 }
