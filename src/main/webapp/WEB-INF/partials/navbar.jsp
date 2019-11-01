@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <nav class="navbar navbar-expand-lg bg-light">
-    <a class="navbar-brand" href="/ads">Adlister</a>
+    <a class="navbar-brand" href="/ads">EventLister</a>
     <c:if test="${sessionScope.user != null}">
         <a class="nav-link" href="/profile">Profile</a>
     </c:if>
@@ -10,7 +10,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item"><a href="/ads/create" class="nav-link">Create Ad</a></li>
+            <li class="nav-item"><a href="/ads/create" class="nav-link">Create Event</a></li>
             <c:choose>
                 <c:when test="${sessionScope.user != null}">
                     <li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>

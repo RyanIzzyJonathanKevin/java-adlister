@@ -42,7 +42,7 @@
                             </a>
 
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="/ad?id=${ad.id}">Go to Ad</a>
+                                <a class="dropdown-item" href="/ad?id=${ad.id}">Go to Event</a>
                                 <a class="dropdown-item" href="/ads/update?id=${ad.id}">Edit</a>
                                 <a class="dropdown-item" href="/ad/delete?id=${ad.id}">Delete</a>
                             </div>
