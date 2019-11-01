@@ -17,9 +17,15 @@ public class JsonAdsServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        List<Ad> ads = DaoFactory.getAdsDao().all();
+        String json = "";
 
-        String json = new Gson().toJson(ads, ads.getClass());
+        if (request.getParameter("id") != null) {
+            Ad ad = DaoFactory.getAdsDao().findAdById(Long.parseLong(request.getParameter("id")));
+            json = new Gson().toJson(ad, ad.getClass());
+        } else {
+            List<Ad> ads = DaoFactory.getAdsDao().all();
+            json = new Gson().toJson(ads, ads.getClass());
+        }
 
         PrintWriter out = response.getWriter();
         response.setContentType("application/json");

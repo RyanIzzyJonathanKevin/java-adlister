@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "controllers.IndividualAdServlet", urlPatterns = "/ad")
-public class IndividualAdServlet extends HttpServlet {
+@WebServlet(name = "controllers.UserAdsServlet", urlPatterns = "/profile/ads")
+public class UserAdsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameter("id") != null){
             long id = Long.parseLong(request.getParameter("id"));

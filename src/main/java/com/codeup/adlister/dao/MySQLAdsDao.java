@@ -39,14 +39,22 @@ public class MySQLAdsDao implements Ads {
     @Override
     public Long insert(Ad ad) {
         try {
-            String insertQuery = "INSERT INTO ads(user_id, title, description) VALUES (?, ?, ?)";
+            String insertQuery = "INSERT INTO ads(user_id, title, description,lat,lon) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement stmt = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
             stmt.setLong(1, ad.getUserId());
             stmt.setString(2, ad.getTitle());
             stmt.setString(3, ad.getDescription());
+            stmt.setDouble(4, ad.getLat());
+            stmt.setDouble(5, ad.getLon());
+
             stmt.executeUpdate();
+
             ResultSet rs = stmt.getGeneratedKeys();
+
             rs.next();
+
+            DaoFactory.getCategoriesDao().insert(rs.getLong(1), ad);
+
             return rs.getLong(1);
         } catch (SQLException e) {
             throw new RuntimeException("Error creating a new ad.", e);
@@ -95,25 +103,22 @@ public class MySQLAdsDao implements Ads {
     }
 
     @Override
-    public Long editAd(Ad ad) {
+    public void editAd(Ad ad) {
         try {
             // Query
-            String query = "UPDATE ads SET title = ?, description = ?, WHERE id = ?";
+            String query = "UPDATE ads SET title = ?, description = ?,lat = ?, lon = ? WHERE id = ?";
             PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
             // Add information
             stmt.setString(1, ad.getTitle());
             stmt.setString(2, ad.getDescription());
-            stmt.setLong(3, ad.getId());
+            stmt.setDouble(3, ad.getLat());
+            stmt.setDouble(4, ad.getLon());
+            stmt.setLong(5, ad.getId());
 
             // Execute
             stmt.executeUpdate();
 
-            ResultSet rs = stmt.getGeneratedKeys();
-            rs.next();
-
-            // Return row updated
-            return rs.getLong(1);
         } catch (SQLException e) {
             throw new RuntimeException("Error editing ad by id", e);
         }
@@ -161,12 +166,15 @@ public class MySQLAdsDao implements Ads {
     }
 
     private Ad extractAd(ResultSet rs) throws SQLException {
+
         return new Ad(
-            rs.getLong("id"),
-            rs.getLong("user_id"),
-            rs.getString("title"),
-            rs.getString("description"),
-                (DaoFactory.getCategoriesDao().findCategory(rs.getLong("id")))
+                rs.getLong("id"),
+                rs.getLong("user_id"),
+                rs.getString("title"),
+                rs.getString("description"),
+                DaoFactory.getCategoriesDao().findCategory(rs.getLong("id")),
+                rs.getDouble("lat"),
+                rs.getDouble("lon")
         );
     }
 
@@ -177,6 +185,7 @@ public class MySQLAdsDao implements Ads {
         }
         return ads;
     }
+
     public Ad findAdById(long id) {
         PreparedStatement ps = null;
         try {
@@ -184,7 +193,7 @@ public class MySQLAdsDao implements Ads {
             ps = connection.prepareStatement(insertQuery);
             ps.setLong(1, id);
             ResultSet rs = ps.executeQuery();
-            if(! rs.next()) {
+            if (!rs.next()) {
                 return null;
             }
             return extractAd(rs);

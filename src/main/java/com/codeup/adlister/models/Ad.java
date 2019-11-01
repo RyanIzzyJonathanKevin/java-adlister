@@ -3,24 +3,39 @@ package com.codeup.adlister.models;
 import java.util.List;
 
 public class Ad {
+
     private long id;
     private long userId;
     private String title;
     private String description;
     private List<String> categories;
+    private double lat;
+    private double lon;
 
-    public Ad(long id, long userId, String title, String description, List<String> categories) {
+    // Default constructor
+    public Ad() {
+    }
+  
+    // Constructor for getting from db
+    public Ad(long id, long userId, String title, String description, List<String> categories, double lat, double lon) {
         this.id = id;
         this.userId = userId;
         this.title = title;
         this.description = description;
         this.categories = categories;
+        this.lat = lat;
+        this.lon = lon;
     }
 
-    public Ad(long userId, String title, String description) {
+    // Constructor for create ad servlet
+    // No id yet
+    public Ad(long userId, String title, String description, List<String> categories, double lat, double lon) {
         this.userId = userId;
         this.title = title;
         this.description = description;
+        this.categories = categories;
+        this.lat = lat;
+        this.lon = lon;
     }
 
     public long getId() {
@@ -63,6 +78,22 @@ public class Ad {
         this.categories = categories;
     }
 
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getLon() {
+        return lon;
+    }
+
+    public void setLon(double lon) {
+        this.lon = lon;
+    }
+
     @Override
     public String toString() {
         return "Ad{" +
@@ -71,6 +102,8 @@ public class Ad {
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", categories=" + categories +
+                ", lat=" + lat +
+                ", lon=" + lon +
                 '}';
     }
 }

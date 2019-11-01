@@ -2,4 +2,5 @@
 target/
 .idea/
 Config.java
-src/main/webapp/static/my-app/*
+keys.js
+my-app
