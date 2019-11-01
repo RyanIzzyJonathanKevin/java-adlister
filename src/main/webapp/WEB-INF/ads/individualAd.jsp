@@ -4,7 +4,7 @@
 <html>
     <head>
         <jsp:include page="/WEB-INF/partials/head.jsp">
-            <jsp:param name="title" value="View Current Ad"/>
+            <jsp:param name="title" value="View Current Event"/>
         </jsp:include>
     </head>
     <body>
