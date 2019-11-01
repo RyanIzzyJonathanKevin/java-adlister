@@ -42,3 +42,12 @@ CREATE TABLE ad_category
     FOREIGN KEY (category_id) REFERENCES categories (id)
 );
 
+
+INSERT INTO categories(category)
+VALUES ('Concert'),
+       ('Movie'),
+       ('Charity'),
+       ('Sports'),
+       ('Musical'),
+       ('Arts');
+

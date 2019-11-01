@@ -31,7 +31,6 @@
             <div style="width: 100%; height: 500px" id="map"></div>
 
         </div>
-        <script src="/static/js/keys.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzaeV4w3j9zQXWGSJ9tBkIH00rZzO0m4E&callback=initMap" async defer></script>
         <script>
             let map;
@@ -48,7 +47,7 @@
                 let marker = new google.maps.Marker({
                     position: latlong,
                     map: map,
-                    title: 'Hello World!'
+                    title: ${ad.title}
                 });
             }
         </script>
