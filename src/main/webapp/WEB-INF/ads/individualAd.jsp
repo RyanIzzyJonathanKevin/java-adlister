@@ -14,6 +14,7 @@
             <h1>${ad.title}</h1>
             <div class="row">
                 <div class="col-md-8">
+                    <p>Posted by: ${user.username}</p>
                     <p>${ad.description}</p>
                     <c:if test="${user.id == ad.userId}">
                         <a href="/ads/update?id=${ad.id}" class="btn btn-primary">Edit</a>
