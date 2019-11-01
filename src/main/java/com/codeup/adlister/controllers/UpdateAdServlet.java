@@ -62,10 +62,8 @@ public class UpdateAdServlet extends HttpServlet {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
             double lat = Double.parseDouble(gson.toJson(results[0].geometry.location.lat));
-            System.out.println("lat = " + lat);
             double lon = Double.parseDouble(gson.toJson(results[0].geometry.location.lng));
-            System.out.println("lon = " + lon);
-            
+
             Ad ad = new Ad(
                     longId,
                     user.getId(),
@@ -75,7 +73,7 @@ public class UpdateAdServlet extends HttpServlet {
                     lat,
                     lon
             );
-            System.out.println("ad = " + ad);
+
             DaoFactory.getCategoriesDao().deleteCategories(longId);
             DaoFactory.getAdsDao().editAd(ad);
             DaoFactory.getCategoriesDao().insert(longId, ad);
