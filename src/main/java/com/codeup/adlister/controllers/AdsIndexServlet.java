@@ -24,9 +24,7 @@ public class AdsIndexServlet extends HttpServlet {
         } else {
             request.setAttribute("ads", getAdsDao().all());
             request.getRequestDispatcher("/WEB-INF/ads/index.jsp").forward(request, response);
-
         }
-
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {

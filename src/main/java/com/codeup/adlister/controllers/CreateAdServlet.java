@@ -61,8 +61,8 @@ public class CreateAdServlet extends HttpServlet {
                     lon
             );
 
-            DaoFactory.getAdsDao().insert(ad);
-            response.sendRedirect("/profile");
+            long id = DaoFactory.getAdsDao().insert(ad);
+            response.sendRedirect("/ad?id=" + id);
         } else {
             request.getSession().setAttribute("error", "Please fill in all required fields");
             response.sendRedirect("/ads/create");
