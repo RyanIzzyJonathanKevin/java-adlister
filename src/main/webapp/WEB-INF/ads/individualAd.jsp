@@ -47,7 +47,7 @@
                 let marker = new google.maps.Marker({
                     position: latlong,
                     map: map,
-                    title: ${ad.title}
+                    title: `${ad.title}`
                 });
             }
         </script>
