@@ -1,19 +1,31 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-    <head>
-        <jsp:include page="/WEB-INF/partials/head.jsp">
-            <jsp:param name="title" value="Viewing All The Ads"/>
-        </jsp:include>
-    </head>
-    <body>
-        <jsp:include page="/WEB-INF/partials/navbar.jsp"/>
+<head>
+    <jsp:include page="/WEB-INF/partials/head.jsp">
+        <jsp:param name="title" value="Viewing All The Ads" />
+    </jsp:include>
+    <style>
+        .form-control{
+            width: 100%;
+        }
 
-        <form action="/ads">
-            <input type="text" class="form-control" name="search">
-            <button class="btn">Search</button>
-        </form>
+        .cont{
+            width: 100%;
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+<jsp:include page="/WEB-INF/partials/navbar.jsp" />
 
+<form action="/ads">
+    <div class="cont">
+        <input type="text" class="form-control" name="search">
+        <button class="btn btn-primary">Search</button>
+    </div>
+
+</form>
         <div class="container">
             <div class="row">
                 <c:forEach var="ad" items="${ads}">
